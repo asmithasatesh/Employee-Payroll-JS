@@ -29,7 +29,7 @@ function CalculateDailyWage(empCheck)
     employees.push("Part Timer");
     employees.push("Full timer");
 
-    console.log("Usecase 2: Employee is "+employees[empCheck]);
+    //console.log("Usecase 2: Employee is "+employees[empCheck]);
     switch(empCheck)
     {
         case IS_PART_TIME:
@@ -43,7 +43,7 @@ function CalculateDailyWage(empCheck)
             break;
     }
     let empWage=empHrs*WAGE_PER_HOUR;
-    console.log("Emp Wage = "+empWage);
+    //console.log("Emp Wage = "+empWage);
     return empWage;
 }
 
@@ -60,18 +60,18 @@ console.log("Usecase 4: TotalEmpWage = "+totalEmpWage ," Num of Working Days : "
 
 //Usecase 5: calculate wages for total working hours 160 or max days of 20 in month
 
-const MAX_HRS_IN_MONTH=100;
+const MAX_HRS_IN_MONTH=160;
 let totalEmpHrs=0;
 let totalWorkingDays=0;
 let totalWage=0;
 var employees=new Array();
 employees.push(0);
-employees.push(1);
-employees.push(2);
+employees.push(4);
+employees.push(8);
 while(totalEmpHrs<=MAX_HRS_IN_MONTH && totalWorkingDays<NUM_OF_WORKING_DAYS)
 {
     totalWorkingDays++;
-    var empCheck=Math.floor(Math.random()*10)%3;
+    var empCheck=Math.floor(Math.random()*10) % 3;
     totalWage+=CalculateDailyWage(empCheck);
     totalEmpHrs+=employees[empCheck];
 }
