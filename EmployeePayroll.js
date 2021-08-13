@@ -17,19 +17,20 @@ const IS_FULL_TIME=2;
 const PART_TIME_HOURS=4;
 const FULL_TIME_HOURS=8;
 const WAGE_PER_HOUR=20;
-
+var empHrs=0;
+var empCheck= Math.floor(Math.random()*10) % 3;
+CalculateDailyWage(empCheck);
 //Refactor UC 2 with Function
-function CalculateDailyWage()
+function CalculateDailyWage(empCheck)
 {
-    var empHrs=0;
-    var empCheck= Math.floor(Math.random()*10) % 3;
+
     //Emploee Type
     var employees=new Array();
     employees.push("Absentees");
     employees.push("Part Timer");
     employees.push("Full timer");
 
-    console.log("Usecase 2: Employee is "+employees[empCheck]+empCheck);
+    console.log("Usecase 2: Employee is "+employees[empCheck]);
     switch(empCheck)
     {
         case IS_PART_TIME:
@@ -44,7 +45,6 @@ function CalculateDailyWage()
     }
     let empWage=empHrs*WAGE_PER_HOUR;
     console.log("Emp Wage = "+empWage);
+    return empWage;
 }
-
-
 
