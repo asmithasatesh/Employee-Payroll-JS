@@ -59,20 +59,32 @@ for(let i=0;i<NUM_OF_WORKING_DAYS;i++)
 console.log("Usecase 4: TotalEmpWage = "+totalEmpWage ," Num of Working Days : "+NUM_OF_WORKING_DAYS);
 
 //Usecase 5: calculate wages for total working hours 160 or max days of 20 in month
-
-const MAX_HRS_IN_MONTH=100;
+const MAX_HRS_IN_MONTH=160;
 let totalEmpHrs=0;
 let totalWorkingDays=0;
 let totalWage=0;
 var employees=new Array();
+//Usecase 6 : Store employeewage in an array
+var employeeWageList=new Array();
 employees.push(0);
-employees.push(1);
-employees.push(2);
+employees.push(4);
+employees.push(8);
 while(totalEmpHrs<=MAX_HRS_IN_MONTH && totalWorkingDays<NUM_OF_WORKING_DAYS)
 {
     totalWorkingDays++;
-    var empCheck=Math.floor(Math.random()*10)%3;
-    totalWage+=CalculateDailyWage(empCheck);
+    var empCheck=Math.floor(Math.random()*10) % 3;
+    let tempwage=CalculateDailyWage(empCheck);
+    totalWage+=tempwage;
     totalEmpHrs+=employees[empCheck];
+    //Add to List
+    employeeWageList.push(tempwage);
 }
 console.log("UC5- Total Days : "+ totalWorkingDays + " Total Hours : "+totalEmpHrs + " Total Emp Wage : "+totalWage);
+
+//Usecase 6: Store Daily wage in Array
+var daycount=0;
+console.log("------- Printing Employee wage List content ------");
+employeeWageList.forEach(element => {
+    daycount++;
+    console.log("Day "+daycount+" wage is "+element);
+});
