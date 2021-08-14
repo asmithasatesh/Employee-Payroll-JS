@@ -88,3 +88,81 @@ employeeWageList.forEach(element => {
     daycount++;
     console.log("Day "+daycount+" wage is "+element);
 });
+
+//UC-7 Array Helper functions
+
+//Usecase 7a) Iterate Array using Helper function Foreach or reduce
+
+console.log("Usecase 7a) Iterate Array using Helper function Foreach or reduce");
+let totEmpWage = 0;
+function sum(dailyWage) {
+  totEmpWage += dailyWage;
+}
+//Foreach to traverse the array and print total wage
+employeeWageList.forEach(sum);
+console.log("Total Wage using Foreach: "+totEmpWage);
+
+function totalWages(accumulator,currentValue)
+{
+return accumulator+currentValue;
+}
+//Using reduce to traverse the array and print total wage- returns the accumulator
+console.log("Total Wage using Reduce: "+employeeWageList.reduce(totalWages,0));
+
+//7b)Show the Day along with Daily Wage using Array map helper function
+console.log("Usecase 7b) Show the Day along with Daily Wage using Array map helper function");
+let day = 0;
+
+function mapDayWithWage(dailywage){
+    day++;
+    return "Day "+day+" = "+dailywage;
+}
+let mapDayWithWageArr = employeeWageList.map(mapDayWithWage);
+console.log("Daily Wage List:");
+console.log(mapDayWithWageArr);
+//7c)Show Days when Full time wage of 160 were earned using filter function
+console.log("Usecase 7c) Show Days when Full time wage of 160 were earned using filter function");
+
+function fullTimeWage(dailyWage){
+    return dailyWage.includes("160");
+}
+
+let fullTime = mapDayWithWageArr.filter(fullTimeWage);
+console.log("Full time along with day:");
+console.log(fullTime);
+
+//7d)Find the first occurrence when Full Time Wage was earned using find function
+console.log("Usecase 7d)Find the first occurrence when Full Time Wage was earned using find function");
+
+function findFullTimeFirstOccurence(dailyWage)
+{
+    return dailyWage.includes("160");
+}
+
+console.log("Daily Wage: "+mapDayWithWageArr.find(findFullTimeFirstOccurence));
+
+//7e) Check if Every Element of Full Time Wage is truly holding Full time wage
+console.log("\nUsecase 7e) Check if Every Element of Full Time Wage is truly holding Full time wage");
+
+function EveryFullTimeWage(dailyWage){
+    return dailyWage.includes("160");
+}
+console.log("Check whether full time array has only fulltime salary: "+fullTime.every(EveryFullTimeWage));
+
+// 7f) Check if there is any Part Time Wage
+console.log("\nUsecase 7f) Check if there is any Part Time Wage");
+function SomePartTimeWage(dailyWage)
+{
+    return dailyWage.includes("80");
+} 
+console.log("Check whether full time array has any parttime salary: "+mapDayWithWageArr.some(SomePartTimeWage));
+
+//7g)Find the number of days worked
+console.log("\nUsecase 7g)Find the number of days worked");
+
+function totalDaysWorked(accumulator,dailyWage){
+    if(dailyWage>0)
+    accumulator++;
+    return accumulator;
+}
+console.log("Number of days employee worked : "+employeeWageList.reduce(totalDaysWorked,0));
