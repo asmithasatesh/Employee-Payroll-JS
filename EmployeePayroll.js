@@ -166,3 +166,36 @@ function totalDaysWorked(accumulator,dailyWage){
     return accumulator;
 }
 console.log("Number of days employee worked : "+employeeWageList.reduce(totalDaysWorked,0));
+
+//UC-8 Using Map
+console.log("Usecase 8: Store the Day and the Daily Wage");
+{
+    const MAX_HRS_IN_MONTH=160;
+    let totalEmpHrs=0;
+    let totalWorkingDays=0;
+    let totalWage=0;
+    let empDailyWageMap = new Map();
+    //Usecase 6 : Store employeewage in an array
+    var employeeWageList=new Array();
+    employees.push(0);
+    employees.push(4);
+    employees.push(8);
+    while(totalEmpHrs<=MAX_HRS_IN_MONTH && totalWorkingDays<NUM_OF_WORKING_DAYS)
+    {
+        totalWorkingDays++;
+        var empCheck=Math.floor(Math.random()*10) % 3;
+        let tempwage=CalculateDailyWage(empCheck);
+        totalWage+=tempwage;
+        totalEmpHrs+=employees[empCheck];
+        empDailyWageMap.set(totalWorkingDays,tempwage);
+    }
+    console.log("Total Days : "+ totalWorkingDays + " Total Hours : "+totalEmpHrs + " Total Emp Wage : "+totalWage);
+    console.log(empDailyWageMap);
+
+  function totalWages(totalWage,dailyWage){
+    return totalWage+dailyWage;
+  }
+  //Array.from create a array with elements satisfying the condition
+  console.log("Emp Wage Map total Wage: "+
+  Array.from(empDailyWageMap.values()).reduce(totalWages,0));
+}
