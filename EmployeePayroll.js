@@ -167,16 +167,16 @@ function totalDaysWorked(accumulator,dailyWage){
 }
 console.log("Number of days employee worked : "+employeeWageList.reduce(totalDaysWorked,0));
 
-//UC-8 Using Map
+//Usecase 8: Store the Day and the Daily Wage
+var empDailyHrmap = new Map();
+let empDailyWageMap = new Map();
 console.log("Usecase 8: Store the Day and the Daily Wage");
 {
     const MAX_HRS_IN_MONTH=160;
     let totalEmpHrs=0;
     let totalWorkingDays=0;
     let totalWage=0;
-    let empDailyWageMap = new Map();
-    //Usecase 6 : Store employeewage in an array
-    var employeeWageList=new Array();
+    var employees=new Array();
     employees.push(0);
     employees.push(4);
     employees.push(8);
@@ -188,6 +188,7 @@ console.log("Usecase 8: Store the Day and the Daily Wage");
         totalWage+=tempwage;
         totalEmpHrs+=employees[empCheck];
         empDailyWageMap.set(totalWorkingDays,tempwage);
+        empDailyHrmap.set(totalWorkingDays,employees[empCheck]);
     }
     console.log("Total Days : "+ totalWorkingDays + " Total Hours : "+totalEmpHrs + " Total Emp Wage : "+totalWage);
     console.log(empDailyWageMap);
@@ -199,3 +200,32 @@ console.log("Usecase 8: Store the Day and the Daily Wage");
   console.log("Emp Wage Map total Wage: "+
   Array.from(empDailyWageMap.values()).reduce(totalWages,0));
 }
+
+//Usecase 9: Arrow Functions
+var findTotal = (totalVal,DailyVal)=>
+{
+    return totalVal+DailyVal;
+}
+  let totalHrs = Array.from(empDailyHrmap.values()).reduce(findTotal,0);
+  let totalSalary = Array.from(empDailyWageMap.values()).filter(dailyWage=>dailyWage>0).reduce(findTotal,0);
+
+  //9a)Use arrow function to find emp total hrs and wage
+  console.log("Usecase 9 a) Using Arrow Function:\nEmpoyee Total hours: "+totalHrs+"\nEmpoyee Total Wage: "+totalSalary);
+
+  //9b)Show fulltime,part time and absent days
+  console.log("Usecase 9b)Show fulltime,part time and absent days");
+  let absent = new Array();
+  let partTimeWorking = new Array();
+  let fullTimeWorking = new Array();
+
+  empDailyHrmap.forEach((value,key,map) =>{
+    if( value == 8)
+    fullTimeWorking.push(key);
+    else if(value == 4)
+    partTimeWorking.push(key);
+    else
+    absent.push(key);
+  })
+  console.log("Absent days "+absent);
+  console.log("Fulltime work days "+fullTimeWorking);
+  console.log("Part time work days : "+partTimeWorking);
