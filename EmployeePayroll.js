@@ -170,13 +170,14 @@ console.log("Number of days employee worked : "+employeeWageList.reduce(totalDay
 //Usecase 8: Store the Day and the Daily Wage
 var empDailyHrmap = new Map();
 let empDailyWageMap = new Map();
+var employees=new Array();
 console.log("Usecase 8: Store the Day and the Daily Wage");
 {
     const MAX_HRS_IN_MONTH=160;
     let totalEmpHrs=0;
     let totalWorkingDays=0;
     let totalWage=0;
-    var employees=new Array();
+
     employees.push(0);
     employees.push(4);
     employees.push(8);
@@ -229,3 +230,29 @@ var findTotal = (totalVal,DailyVal)=>
   console.log("Absent days "+absent);
   console.log("Fulltime work days "+fullTimeWorking);
   console.log("Part time work days : "+partTimeWorking);
+
+  //UC10-Storing Days Hrs and Wages in object
+{
+    const MAX_HRS_IN_MONTH=160;
+    let totalEmpHrs=0;
+    let totalWorkingDays=0;
+    let totalWage=0;
+    let employeeDayandHr =new Array();
+    while(totalEmpHrs<=MAX_HRS_IN_MONTH && totalWorkingDays<NUM_OF_WORKING_DAYS)
+    {
+        totalWorkingDays++;
+        var empCheck=Math.floor(Math.random()*10) % 3;
+        let tempwage=CalculateDailyWage(empCheck);
+        totalWage+=tempwage;
+        totalEmpHrs+=employees[empCheck];
+        employeeDayandHr.push({
+            day:totalWorkingDays,
+            dailyHour:employees[empCheck],
+            dailyWage:tempwage,
+            toString(){
+                return '\nDay:'+this.day+"\tHours"+this.dailyHour+"\tWages: "+this.dailyWage
+            },
+        });
+    }
+    console.log("Usecase 10: Data stored in the Array of object:"+employeeDayandHr);
+   }
