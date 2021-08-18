@@ -5,12 +5,20 @@ class EmployeePayroll
     id;
     salary;
     name;
-    //constructor to store data
-    constructor(id,name,salary) {
-        this.id = id;
-        this.name = name;
-        this.salary = salary;
-    }
+      
+    //Extend gender and start date
+    gender;
+    startDate;
+   
+    //Constructor
+    constructor(...params) {
+    this.id = params[0];
+    this.name = params[1];
+    this.salary = params[2];
+    this.gender=params[3];
+    this.startDate=params[4];
+    
+}
  //getter setter Method
     get name() {
         return this.name;
@@ -19,8 +27,9 @@ class EmployeePayroll
         this.name = name;
     }
     toString(){
-        return "id : "+this.id+"\nName : "+this.name+"\nSalary : "+this.salary;
+        return "id : "+this.id+"\nName : "+this.name+"\nSalary : "+this.salary+"\nGender : "+this.gender+"\nStartDate : "+this.startDate;
     }
 }
-let employeePayroll = new EmployeePayroll(1,"Asmitha",1000000);
+//Date format: Wed Aug 18 2021 09:14:58 GMT+0530 (India Standard Time)
+let employeePayroll = new EmployeePayroll(1,"Asmitha",1000000,'F',(new Date()).toString().split(' ').slice(1,4).join(" "));
 console.log(employeePayroll.toString());
