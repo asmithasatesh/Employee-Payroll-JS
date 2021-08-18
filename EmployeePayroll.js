@@ -231,13 +231,14 @@ var findTotal = (totalVal,DailyVal)=>
   console.log("Fulltime work days "+fullTimeWorking);
   console.log("Part time work days : "+partTimeWorking);
 
+  let employeeDayandHr =new Array();
   //UC10-Storing Days Hrs and Wages in object
 {
     const MAX_HRS_IN_MONTH=160;
     let totalEmpHrs=0;
     let totalWorkingDays=0;
     let totalWage=0;
-    let employeeDayandHr =new Array();
+
     while(totalEmpHrs<=MAX_HRS_IN_MONTH && totalWorkingDays<NUM_OF_WORKING_DAYS)
     {
         totalWorkingDays++;
@@ -255,4 +256,27 @@ var findTotal = (totalVal,DailyVal)=>
         });
     }
     console.log("Usecase 10: Data stored in the Array of object:"+employeeDayandHr);
-   }
+
+    //Usecase 11 : Perform following Object operations using Arrow Functions
+
+        // 11a)- Calc total Wage and total hours worked
+       console.log("11a) Calc total Wage and total hours worked");
+       totalWage = employeeDayandHr.filter(dailyHourWage => dailyHourWage.dailyWage > 0).reduce( (totalWages, dailyHourWage) => totalWages += dailyHourWage.dailyWage, 0);
+       totalWorkingHours = employeeDayandHr.filter(dailyHourWage => dailyHourWage.dailyHour > 0).reduce((totalHrs, dailyHourWage) => totalHrs += dailyHourWage.dailyHour, 0);
+       console.log("Total Wage: " + totalWage);
+       console.log("Total working hours:" + totalWorkingHours);
+   
+       //11)b Show the full workings days using foreach
+       console.log("11)b Show the full workings days using foreach");
+       employeeDayandHr.filter(dailyHourWage => dailyHourWage.dailyHour == 8).forEach(dailyHour => console.log(dailyHour.toString()));
+   
+       //11c) Show Part working days using Map by reducing to String Array
+       let partTimeEmployee= employeeDayandHr.filter(pEmployeeArr=>pEmployeeArr.dailyHour==4).map(pEmployeeArr=>pEmployeeArr.toString());
+       console.log("11c): Part time employee using string array:"+partTimeEmployee);
+
+       //11d) No working days only using Map function
+       let noWorkingday= employeeDayandHr.filter(pEmployeeArr=>pEmployeeArr.dailyHour==0).map(pEmployeeArr=>pEmployeeArr.day);
+       console.log("11d) No working days:",noWorkingday.join(","));
+}
+
+
